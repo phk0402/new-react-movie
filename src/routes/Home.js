@@ -1,9 +1,8 @@
+import Movie from "../pages/Movie";
 
 function Home() {
-  <>
-    {/*<ToDoList/>*/}
-    {/*<CoinTracker/>*/}
+  return (
     <Movie/>
-  </>
+    )
 }
 export default Home;
