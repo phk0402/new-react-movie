@@ -1,36 +1,39 @@
 import {useEffect, useState} from "react"
 import MovieList from "./components/MovieList"
+import "../../assets/movieList.scss";
 
 const Movie = () => {
-  const [loading, setLoading] = useState(true);
-  const [movies, setMovies] = useState([]);
-  const getMovies = async () => {
-    const json = await (await (fetch("https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year"))).json();
-    setMovies(json.data.movies);
-    setLoading(false);
-  };
+    const [loading, setLoading] = useState(true);
+    const [movies, setMovies] = useState([]);
+    const getMovies = async () => {
+        const json = await (await (fetch("https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year"))).json();
+        setMovies(json.data.movies);
+        setLoading(false);
+    };
 
-  useEffect(() => {
-    getMovies();
-  }, []);
+    useEffect(() => {
+        getMovies();
+    }, []);
 
-  return (
-    <div>
-      {loading ?
-        <h1>Loading...</h1> :
-        <div>{movies.map((movie) => (
-          <MovieList
-            key={movie.id}
-            id={movie.id}
-            coverImg={movie.medium_cover_image}
-            title={movie.title}
-            summary={movie.summary}
-            genres={movie.genres}
-          />
-        ))}</div>
-      }
-    </div>
-  )
+    return (
+        <div>
+            {loading ?
+                <h1>Loading...</h1> :
+                <ul className="movie-list">
+                    {movies.map((movie) => (
+                        <MovieList
+                            key={movie.id}
+                            id={movie.id}
+                            coverImg={movie.medium_cover_image}
+                            title={movie.title}
+                            summary={movie.summary}
+                            genres={movie.genres}
+                        />
+                    ))}
+                </ul>
+            }
+        </div>
+    )
 }
 
 export default Movie;

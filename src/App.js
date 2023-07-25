@@ -1,4 +1,5 @@
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import "./assets/reset.scss";
 import Home from "./routes/Home";
 import Detail from "./routes/Detail";
 
